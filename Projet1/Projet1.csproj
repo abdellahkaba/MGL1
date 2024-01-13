@@ -169,8 +169,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AppartementsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MaisonsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProprietairesController.cs" />
+    <Compile Include="Controllers\StudiosController.cs" />
+    <Compile Include="Controllers\TerrainsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -4207,6 +4212,31 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Proprietaires\Create.cshtml" />
+    <Content Include="Views\Proprietaires\Delete.cshtml" />
+    <Content Include="Views\Proprietaires\Details.cshtml" />
+    <Content Include="Views\Proprietaires\Edit.cshtml" />
+    <Content Include="Views\Proprietaires\Index.cshtml" />
+    <Content Include="Views\Maisons\Create.cshtml" />
+    <Content Include="Views\Maisons\Delete.cshtml" />
+    <Content Include="Views\Maisons\Details.cshtml" />
+    <Content Include="Views\Maisons\Edit.cshtml" />
+    <Content Include="Views\Maisons\Index.cshtml" />
+    <Content Include="Views\Appartements\Create.cshtml" />
+    <Content Include="Views\Appartements\Delete.cshtml" />
+    <Content Include="Views\Appartements\Details.cshtml" />
+    <Content Include="Views\Appartements\Edit.cshtml" />
+    <Content Include="Views\Appartements\Index.cshtml" />
+    <Content Include="Views\Studios\Create.cshtml" />
+    <Content Include="Views\Studios\Delete.cshtml" />
+    <Content Include="Views\Studios\Details.cshtml" />
+    <Content Include="Views\Studios\Edit.cshtml" />
+    <Content Include="Views\Studios\Index.cshtml" />
+    <Content Include="Views\Terrains\Create.cshtml" />
+    <Content Include="Views\Terrains\Delete.cshtml" />
+    <Content Include="Views\Terrains\Details.cshtml" />
+    <Content Include="Views\Terrains\Edit.cshtml" />
+    <Content Include="Views\Terrains\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

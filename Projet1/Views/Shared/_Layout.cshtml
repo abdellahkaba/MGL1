@@ -142,11 +142,11 @@
                                         <i class="icon-user"></i>
                                         <span class="ml-2">Profile </span>
                                     </a>
-                                    <a href="./email-inbox.html" class="dropdown-item">
+                                    <a href="" class="dropdown-item">
                                         <i class="icon-envelope-open"></i>
                                         <span class="ml-2">Inbox </span>
                                     </a>
-                                    <a href="./page-login.html" class="dropdown-item">
+                                    <a href="" class="dropdown-item">
                                         <i class="icon-key"></i>
                                         <span class="ml-2">Logout </span>
                                     </a>
@@ -164,11 +164,33 @@
                     <li class="nav-label first">Main Menu</li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="fa fa-users"></i><span class="nav-text">Proprietaire</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="@Url.Action("Index","Proprietaires")"><i class="fa fa-list"></i><span class="nav-text">Listes des proprietaires</span></a></li>
+                            <li><a href=""><i class="fa fa-user-plus"></i><span class="nav-text">Ajouter un proprietaire</span></a></li>
+                        </ul>
+                    </li>
+        
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="fa fa-google-wallet"></i><span class="nav-text">Biens</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="@Url.Action("Index","Maisons")"> <i class="fa fa-home"></i><span class="nav-text">Maisons</span></a></li>
+                            <li><a href="@Url.Action("Index","Appartements")"><i class="fa fa-building"></i><span class="nav-text">Appartements</span></a></li>
+                            <li><a href="@Url.Action("Index","Terrains")"><i class="fa fa-globe"></i><span class="nav-text">Terrains</span></a></li>
+                            <li><a href="@Url.Action("Index","Studios")"><i class="fa fa-headphones"></i><span class="nav-text">Studios</span></a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon icon-single-04"></i><span class="nav-text">Dashboard</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./index.html">Dashboard 1</a></li>
-                            <li><a href="./index2.html">Dashboard 2</a></li>
+                            <li><a href="">Dashboard 1</a></li>
+                            <li><a href="">Dashboard 2</a></li>
                         </ul>
                     </li>
 
@@ -197,7 +219,7 @@
 
 
     @Scripts.Render("~/bundles/jsasset")
-    @RenderSection("script", required: false)
+    @RenderSection("Scripts", required: false)
 
 </body>
 

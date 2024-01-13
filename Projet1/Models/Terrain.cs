@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace Projet1.Models
 {
-    public class Terrain
+    public class Terrain: Bien
     {
-        public int idBien { get; set; }
-        public Nullable<float> superficie { get; set; }
-
-        [ForeignKey("Bien")]
-        public int idKeyBien { get; set; }
+        [Display(Name = "Type Terrain"), Required(ErrorMessage = "*")]
+        public string typeTerrain { get; set; }
     }
 }

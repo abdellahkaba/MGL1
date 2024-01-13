@@ -1,0 +1,74 @@
+﻿@model Projet1.Models.Proprietaire
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Proprietaire</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.prenom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prenom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.login)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdProprio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdProprio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nomProprio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nomProprio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contactProprio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contactProprio)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idUser }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

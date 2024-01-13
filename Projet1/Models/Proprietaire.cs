@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Projet1.Models
 {
-    public class Proprietaire
+    public class Proprietaire: User
     {
         [Key]
         public int IdProprio { get; set; }
@@ -17,7 +17,7 @@ namespace Projet1.Models
         [Display(Name = "Contact du propriétaire"), Required(ErrorMessage ="*")]
         public string contactProprio { get; set; }
 
-        public virtual ICollection<Bien> propriete { get; set; }
+        public virtual ICollection<Bien> propriete { get; set; } 
 
 
     }

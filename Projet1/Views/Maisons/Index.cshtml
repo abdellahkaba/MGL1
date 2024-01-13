@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Projet1.Models.Maison>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Proprietaire.prenom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descriptionBien)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.superficieBien)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lacaliteBien)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nbrSalleEau)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nbrCuisine)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nbrToilette)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nbrChambre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Proprietaire.prenom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descriptionBien)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.superficieBien)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lacaliteBien)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nbrSalleEau)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nbrCuisine)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nbrToilette)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nbrChambre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdBien }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdBien }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdBien })
+        </td>
+    </tr>
+}
+
+</table>

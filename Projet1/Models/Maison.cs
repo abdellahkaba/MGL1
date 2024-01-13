@@ -13,13 +13,11 @@ namespace Projet1.Models
         [Display(Name = "Nombre de chambre"), Required(ErrorMessage = "*")] 
         public int nbrChambre { get; set; }
 
-        [Display(Name = "Nombre de Salle"), Required(ErrorMessage = "*")]
-        public int nbrSalleEau { get; set;}
+        // Propriété de navigation vers la classe Appartement
+        public virtual List<Appartement> ListeAppartements { get; set; } = new List<Appartement>();
 
-        [Display(Name = "Nombre de cuisine"), Required(ErrorMessage = "*")]
-        public int nbrCuisine { get; set; }
+        //Propriété de la navigation vers la classe Appartement
+        public virtual List<Studio> ListeStudios { get; set; } = new List<Studio>();
 
-        [Display(Name = "Nombre de toilette"), Required(ErrorMessage = "*")]
-        public int nbrToilette { get; set; }
     }
 }
