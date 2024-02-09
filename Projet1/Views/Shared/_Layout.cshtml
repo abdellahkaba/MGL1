@@ -6,9 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Focus - Bootstrap Admin Dashboard </title>
+
+    @*<link href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/sweetalert2.js"></script>
+    <link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" />*@
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" />
+    
+
     <!-- Favicon icon -->
     @Styles.Render("~/Content/asset")
+
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/sweetalert/css")
     @RenderSection("Style", required: false)
 
 
@@ -38,7 +51,7 @@
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="index.html" class="brand-logo">
+            <a href="" class="brand-logo">
                 <img class="logo-abbr" src="./asset/images/logo.png" alt="">
                 <img class="logo-compact" src="./asset/images/logo-text.png" alt="">
                 <img class="brand-title" src="./asset/images/logo-text.png" alt="">
@@ -161,38 +174,38 @@
         <div class="quixnav">
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li class="nav-label first">Main Menu</li>
+                    <li class="nav-label first">Menu principal</li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="fa fa-users"></i><span class="nav-text">Proprietaire</span>
+                            <i class="fa fa-users"></i><span class="nav-text">Proprietaires</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="@Url.Action("Index","Proprietaires")"><i class="fa fa-list"></i><span class="nav-text">Listes des proprietaires</span></a></li>
-                            <li><a href=""><i class="fa fa-user-plus"></i><span class="nav-text">Ajouter un proprietaire</span></a></li>
-                        </ul>
-                    </li>
-        
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="fa fa-google-wallet"></i><span class="nav-text">Biens</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="@Url.Action("Index","Maisons")"> <i class="fa fa-home"></i><span class="nav-text">Maisons</span></a></li>
-                            <li><a href="@Url.Action("Index","Appartements")"><i class="fa fa-building"></i><span class="nav-text">Appartements</span></a></li>
-                            <li><a href="@Url.Action("Index","Terrains")"><i class="fa fa-globe"></i><span class="nav-text">Terrains</span></a></li>
-                            <li><a href="@Url.Action("Index","Studios")"><i class="fa fa-headphones"></i><span class="nav-text">Studios</span></a></li>
+
                         </ul>
                     </li>
 
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon icon-single-04"></i><span class="nav-text">Dashboard</span>
+                            <i class="fa fa-google-wallet"></i><span class="nav-text">Biens</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="">Dashboard 1</a></li>
-                            <li><a href="">Dashboard 2</a></li>
+                            <li><a href="@Url.Action("Index","MaisonViewModels")"> <i class="fa fa-home"></i><span class="nav-text">Maisons</span></a></li>
+                            <li><a href="@Url.Action("Index","AppartementViewModels")"><i class="fa fa-building"></i><span class="nav-text">Appartements</span></a></li>
+                            <li><a href="@Url.Action("Index","TerrainViewModels")"><i class="fa fa-globe"></i><span class="nav-text">Terrains</span></a></li>
+                            <li><a href="@Url.Action("Index","Studios")"><i class="fa fa-headphones"></i><span class="nav-text">Studios</span></a></li>
                         </ul>
                     </li>
+
+                    @*   <li>
+                            <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                <i class="icon icon-single-04"></i><span class="nav-text">Dashboard</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="">Dashboard 1</a></li>
+                                <li><a href="">Dashboard 2</a></li>
+                            </ul>
+                        </li>*@
 
                 </ul>
             </div>
@@ -201,6 +214,7 @@
         <div class="content-body">
             <!-- row -->
             <div class="container-fluid">
+                @Html.Partial("_Flash")
                 @RenderBody()
 
             </div>
@@ -217,9 +231,17 @@
 
     </div>
 
-
+     
     @Scripts.Render("~/bundles/jsasset")
     @RenderSection("Scripts", required: false)
+    @Scripts.Render("~/bundles/sweetalert/js")
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+    <script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script>
+        let table = new DataTable('.myTable');
+    </script>
 
 </body>
 

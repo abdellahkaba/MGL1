@@ -30,7 +30,7 @@ namespace Projet1.Models
         [Display(Name = "Nombre de toilette"), Required(ErrorMessage = "*")]
         public int nbrToilette { get; set; }
 
-        public int IdProprio { get; set; }
+        public int? IdProprio { get; set; }
 
         [ForeignKey("IdProprio")]
         public virtual Proprietaire Proprietaire { get; set; }

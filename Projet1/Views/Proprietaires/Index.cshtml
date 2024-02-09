@@ -1,69 +1,80 @@
-﻿@model IEnumerable<Projet1.Models.Proprietaire>
-
+﻿@model PagedList.IPagedList<Projet1.Models.Proprietaire>
+@using PagedList.Mvc;
+@using Projet1.Models;
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>@RessourceImmo.TitreListeProprietaire</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.Label("prenom")
+            <div class="col-md-5">
+                @Html.TextBox("prenom")
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("nom")
+            <div class="col-md-5">
+                @Html.TextBox("nom")
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Rechercher" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<p class="btn btn-primary text-dark">
+    @Html.ActionLink(RessourceImmo.Nouveau, "Create")
 </p>
-<table class="table">
+<table class="table text-dark">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.prenom)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().prenom)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.nom)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().nom)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.login)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().login)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IdProprio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nomProprio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.contactProprio)
-        </th>
-        <th></th>
+        @* <th>
+                @Html.DisplayNameFor(model => model.password)
+            </th>*@
+        <th class="text-center">Action</th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.prenom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.login)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdProprio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nomProprio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.contactProprio)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idUser }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idUser }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idUser })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.prenom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.login)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.password)
+                </td>*@
+            <td class="col-md-4 text-center">
+                @Html.ActionLink(RessourceImmo.Modifier, "Edit", new { id = item.idUser }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink(RessourceImmo.VoirDetails, "Details", new { id = item.idUser }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink(RessourceImmo.Supprimer, "Delete", new { id = item.idUser }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
 
 </table>
+    Page @(Model.PageCount < Model.PageNumber ? 0 :  Model.PageNumber) / @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, nom = ViewBag.nom, prenom = ViewBag.prenom }));

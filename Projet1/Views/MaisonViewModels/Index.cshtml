@@ -1,0 +1,111 @@
+﻿@model PagedList.IPagedList<Projet1.Models.MaisonViewModel>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Liste des maisons";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<h2>Liste des Maisons</h2>
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.Label("Localité")
+            <div class="col-md-5">
+                @Html.TextBox("localiteBien")
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Rechercher" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<p class="btn btn-primary text-dark">
+    @Html.ActionLink("Nouvelle Maison", "Create")
+</p>
+<table class="table text-dark">
+    <tr>
+        @*<th>
+                @Html.DisplayNameFor(model => model.Proprietaire.prenom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.descriptionBien)
+            </th>*@
+        <th class="">
+            Superficie
+
+        </th>
+        <th>
+            Localité
+        </th>
+        <th>
+            Nombre de Salle Eau
+        </th>
+        <th>
+            Nombre de Cuisine
+        </th>
+        <th>
+            Nombre de Toilette
+        </th>
+        <th>
+            Nombre de chambre
+        </th>
+        <th class="text-center">Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @* <td>
+                    @Html.DisplayFor(modelItem => item.Proprietaire.prenom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descriptionBien)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.superficieBien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lacaliteBien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nbrSalleEau)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nbrCuisine)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nbrToilette)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nbrChambre)
+            </td>
+            <td class="col-md-4 text-center gx-4">
+                @Html.ActionLink("Edit", "Edit", new { idBien = item.IdBien }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Details", "Details", new { idBien = item.IdBien }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Delete", "Delete", new { idBien = item.IdBien, }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+ Page @(Model.PageCount < Model.PageNumber ? 0 :  Model.PageNumber) / @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, localiteBien = ViewBag.localiteBien })) ;
+
+
+@section Scripts {
+
+    <script src="/lib/jquery//jquery/dis/jqurey.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <script type="text/javascript">
+          toastr.success('@TempData["message"]');
+    </script>
+}

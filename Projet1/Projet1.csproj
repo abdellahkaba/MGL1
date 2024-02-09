@@ -47,6 +47,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -165,32 +171,43 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\Helper.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AppartementsController.cs" />
+    <Compile Include="Controllers\AppartementViewModelsController.cs" />
+    <Compile Include="Controllers\DataTableController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\MaisonsController.cs" />
+    <Compile Include="Controllers\MaisonViewModelsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProprietairesController.cs" />
-    <Compile Include="Controllers\StudiosController.cs" />
-    <Compile Include="Controllers\TerrainsController.cs" />
+    <Compile Include="Controllers\SweetController.cs" />
+    <Compile Include="Controllers\TerrainViewModelsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Appartement.cs" />
+    <Compile Include="Models\AppartementViewModel.cs" />
     <Compile Include="Models\BdImmobilier.cs" />
     <Compile Include="Models\Bien.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Maison.cs" />
+    <Compile Include="Models\MaisonViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Proprietaire.cs" />
+    <Compile Include="Models\RessourceImmo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RessourceImmo.resx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Studio.cs" />
+    <Compile Include="Models\StudioViewModel.cs" />
     <Compile Include="Models\Terrain.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\TerrainViewModel.cs" />
+    <Compile Include="Models\Utilisateur.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -3723,15 +3740,20 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\sweetalert\bootstrap-sweetalert.png" />
+    <Content Include="Content\sweetalert\docs.css" />
+    <Content Include="Content\sweetalert\sweet-alert.css" />
+    <Content Include="Content\sweetalert\sweetalert2.all.js" />
+    <Content Include="Content\sweetalert\sweetalert2.all.min.js" />
+    <Content Include="Content\sweetalert\sweetalert2.css" />
+    <Content Include="Content\sweetalert\sweetalert2.js" />
+    <Content Include="Content\sweetalert\sweetalert2.min.css" />
+    <Content Include="Content\sweetalert\sweetalert2.min.js" />
+    <Content Include="Content\sweetalert\thumbs-up.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bootstrap.bundle.min.js" />
-    <Content Include="Scripts\bootstrap.esm.js" />
-    <Content Include="Scripts\bootstrap.esm.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="asset\css\style.css.map" />
     <Content Include="asset\icons\avasta\fonts\avasta.eot" />
     <Content Include="asset\icons\avasta\fonts\avasta.ttf" />
@@ -4167,17 +4189,29 @@
     <Content Include="asset\vendor\tinymce\skins\lightgray\fonts\tinymce.eot" />
     <Content Include="asset\vendor\tinymce\skins\lightgray\fonts\tinymce.ttf" />
     <Content Include="asset\vendor\tinymce\skins\lightgray\fonts\tinymce.woff" />
-    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.4.1.js" />
-    <Content Include="Scripts\jquery-3.4.1.min.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\sweetalert\sweet-alert.less" />
+    <Content Include="Content\sweetalert\sweet-alert-combine.less" />
+    <Content Include="Content\sweetalert\sweet-alert-animations.less" />
+    <Content Include="Content\bootstrap\variables.less" />
+    <Content Include="Content\bootstrap\mixins.less" />
+    <None Include="Scripts\jquery-3.7.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.7.1.js" />
+    <Content Include="Scripts\jquery-3.7.1.min.js" />
+    <Content Include="Scripts\jquery-3.7.1.slim.js" />
+    <Content Include="Scripts\jquery-3.7.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\sweetalert2.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -4212,31 +4246,29 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\MaisonViewModels\Create.cshtml" />
+    <Content Include="Views\MaisonViewModels\Delete.cshtml" />
+    <Content Include="Views\MaisonViewModels\Details.cshtml" />
+    <Content Include="Views\MaisonViewModels\Edit.cshtml" />
+    <Content Include="Views\MaisonViewModels\Index.cshtml" />
     <Content Include="Views\Proprietaires\Create.cshtml" />
     <Content Include="Views\Proprietaires\Delete.cshtml" />
     <Content Include="Views\Proprietaires\Details.cshtml" />
     <Content Include="Views\Proprietaires\Edit.cshtml" />
     <Content Include="Views\Proprietaires\Index.cshtml" />
-    <Content Include="Views\Maisons\Create.cshtml" />
-    <Content Include="Views\Maisons\Delete.cshtml" />
-    <Content Include="Views\Maisons\Details.cshtml" />
-    <Content Include="Views\Maisons\Edit.cshtml" />
-    <Content Include="Views\Maisons\Index.cshtml" />
-    <Content Include="Views\Appartements\Create.cshtml" />
-    <Content Include="Views\Appartements\Delete.cshtml" />
-    <Content Include="Views\Appartements\Details.cshtml" />
-    <Content Include="Views\Appartements\Edit.cshtml" />
-    <Content Include="Views\Appartements\Index.cshtml" />
-    <Content Include="Views\Studios\Create.cshtml" />
-    <Content Include="Views\Studios\Delete.cshtml" />
-    <Content Include="Views\Studios\Details.cshtml" />
-    <Content Include="Views\Studios\Edit.cshtml" />
-    <Content Include="Views\Studios\Index.cshtml" />
-    <Content Include="Views\Terrains\Create.cshtml" />
-    <Content Include="Views\Terrains\Delete.cshtml" />
-    <Content Include="Views\Terrains\Details.cshtml" />
-    <Content Include="Views\Terrains\Edit.cshtml" />
-    <Content Include="Views\Terrains\Index.cshtml" />
+    <Content Include="Views\AppartementViewModels\Create.cshtml" />
+    <Content Include="Views\AppartementViewModels\Delete.cshtml" />
+    <Content Include="Views\AppartementViewModels\Details.cshtml" />
+    <Content Include="Views\AppartementViewModels\Edit.cshtml" />
+    <Content Include="Views\AppartementViewModels\Index.cshtml" />
+    <Content Include="Views\TerrainViewModels\Create.cshtml" />
+    <Content Include="Views\TerrainViewModels\Delete.cshtml" />
+    <Content Include="Views\TerrainViewModels\Details.cshtml" />
+    <Content Include="Views\TerrainViewModels\Edit.cshtml" />
+    <Content Include="Views\TerrainViewModels\Index.cshtml" />
+    <Content Include="Views\DataTable\dataTable.cshtml" />
+    <Content Include="Views\Sweet\Alert.cshtml" />
+    <Content Include="Views\Shared\_Flash.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -4265,8 +4297,14 @@
     <Content Include="Scripts\bootstrap.esm.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.7.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Models\RessourceImmo.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RessourceImmo.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,124 @@
+﻿@model Projet1.Models.AppartementViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Appartements</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="container text-dark">
+    <h4 class="text-bg-info">Nouvel appartement</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+
+                
+                <label class="form-label">Description</label>
+                @Html.EditorFor(model => model.descriptionBien, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.descriptionBien, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                
+                    <label class="form-label">Superficie</label>
+                    @Html.EditorFor(model => model.superficieBien, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.superficieBien, "", new { @class = "text-danger" })
+             
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+               
+                    <label class="form-label">Localité</label>
+                    @Html.EditorFor(model => model.lacaliteBien, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.lacaliteBien, "", new { @class = "text-danger" })
+                
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                    
+                    <label class="form-label">Nombre Salle Eau</label>
+                    @Html.EditorFor(model => model.nbrSalleEau, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nbrSalleEau, "", new { @class = "text-danger" })
+              
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                    
+                    <label class="form-label">Nombre Cuisine </label>
+                    @Html.EditorFor(model => model.nbrCuisine, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nbrCuisine, "", new { @class = "text-danger" })
+               
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                
+                    <label class="form-label">Nombre de toilette</label>
+                    @Html.EditorFor(model => model.nbrToilette, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nbrToilette, "", new { @class = "text-danger" })
+            
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                    <label class="form-label">Nombre de Salle</label>
+                    @Html.EditorFor(model => model.nbrSalle, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nbrSalle, "", new { @class = "text-danger" })
+          
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                        <label class="form-label">Choisir un Utilisateur</label>
+                    
+                        @Html.DropDownList("IdProprio", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.IdProprio, "", new { @class = "text-danger" })
+                
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="btn btn-danger">
+                @Html.ActionLink("Retour", "Index", null, new { @class = "text-white" })
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

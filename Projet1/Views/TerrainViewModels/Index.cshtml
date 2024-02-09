@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Projet1.Models.TerrainViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Liste des Bien de Terrains</h2>
+
+<p class="btn btn-primary text-dark">
+    @Html.ActionLink("Nouvel Terrain", "Create")
+</p>
+<table class="table text-dark">
+    <tr>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Proprietaire.prenom)
+        </th>*@
+        <th>
+           Type de Terrain
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Superfice
+        </th>
+        <th>
+            Localité
+        </th>
+        <th class="text-center">Actions</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+@*        <td>
+            @Html.DisplayFor(modelItem => item.Proprietaire.prenom)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.typeTerrain)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descriptionBien)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.superficieBien)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lacaliteBien)
+        </td>
+        <td class="col-md-4 text-center">
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdBien }, new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdBien }, new { @class = "btn btn-info" }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdBien } , new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

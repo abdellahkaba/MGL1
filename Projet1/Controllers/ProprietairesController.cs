@@ -7,17 +7,43 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Projet1.Models;
+using PagedList.Mvc;
+using PagedList;
+using Projet1.Models;
 
 namespace Projet1.Controllers
 {
     public class ProprietairesController : Controller
     {
         private BdImmobilier db = new BdImmobilier();
+        int pageSize = 2;
 
         // GET: Proprietaires
-        public ActionResult Index()
+        //public ActionResult Index(int? page, string searchTerm)
+        //{
+        //    ViewBag.searchTerm = searchTerm != null ? searchTerm : "";
+        //    page = page.HasValue ? page : 1;
+        //    var liste = db.proprietaires.ToList();
+        //    return View(liste.ToPagedList((int)page, pageSize));
+
+        //}
+        public ActionResult Index(int? page , string nom ,string prenom)
         {
-            return View(db.proprietaires.ToList());
+            page = page.HasValue ? page : 1;
+            var liste = db.proprietaires.ToList();
+
+            // passer les instructions de recherche
+            ViewBag.prenom = prenom;
+            ViewBag.nom = nom;
+            if (!string.IsNullOrEmpty(prenom))
+            {
+                liste = liste.Where(a => a.prenom.ToLower().Contains(prenom.ToLower())).ToList();
+            }
+            if (!string.IsNullOrEmpty(nom))
+            {
+                liste = liste.Where(a=>a.nom.ToLower().Contains(nom.ToLower())).ToList();
+            }
+                return View(liste.ToPagedList((int)page, pageSize));
         }
 
         // GET: Proprietaires/Details/5
@@ -27,7 +53,7 @@ namespace Projet1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Proprietaire proprietaire = (Proprietaire)db.proprietaires.Find(id);
+            Proprietaire proprietaire = (Proprietaire) db.users.Find(id);
             if (proprietaire == null)
             {
                 return HttpNotFound();
@@ -46,11 +72,11 @@ namespace Projet1.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idUser,prenom,nom,login,password,IdProprio,nomProprio,contactProprio")] Proprietaire proprietaire)
+        public ActionResult Create([Bind(Include = "idUser,prenom,nom,login,password")] Proprietaire proprietaire)
         {
             if (ModelState.IsValid)
             {
-                db.proprietaires.Add(proprietaire);
+                db.users.Add(proprietaire);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +91,7 @@ namespace Projet1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Proprietaire proprietaire = (Proprietaire)db.proprietaires.Find(id);
+            Proprietaire proprietaire = db.proprietaires.Find(id);
             if (proprietaire == null)
             {
                 return HttpNotFound();
@@ -78,7 +104,7 @@ namespace Projet1.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idUser,prenom,nom,login,password,IdProprio,nomProprio,contactProprio")] Proprietaire proprietaire)
+        public ActionResult Edit([Bind(Include = "idUser,prenom,nom,login,password")] Proprietaire proprietaire)
         {
             if (ModelState.IsValid)
             {
@@ -90,13 +116,13 @@ namespace Projet1.Controllers
         }
 
         // GET: Proprietaires/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? idBien)
         {
-            if (id == null)
+            if (idBien == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Proprietaire proprietaire = (Proprietaire)db.proprietaires.Find(id);
+            Proprietaire proprietaire = (Proprietaire)db.users.Find(idBien);
             if (proprietaire == null)
             {
                 return HttpNotFound();
@@ -107,10 +133,10 @@ namespace Projet1.Controllers
         // POST: Proprietaires/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int idBien)
         {
-            Proprietaire proprietaire = (Proprietaire)db.proprietaires.Find(id);
-            db.proprietaires.Remove(proprietaire);
+            Proprietaire proprietaire = (Proprietaire)db.users.Find(idBien);
+            db.users.Remove(proprietaire);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

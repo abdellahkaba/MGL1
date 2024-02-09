@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Projet1.Models.AppartementViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>Liste des Appartements</h2>
+
+<p class="btn btn-primary text-dark">
+    @Html.ActionLink("Nouvel Appartement", "Create")
+</p>
+<table id="" class="table text-dark">
+    <tr>
+
+        <th>
+            Description
+        </th>
+        <th>
+            Superficie
+        </th>
+        <th>
+            Localité
+        </th>
+        <th>
+            Nombre Salle Eau
+        </th>
+        <th>
+            Nombre de Cuisine
+        </th>
+        <th>
+            Nombre de Toilette
+        </th>
+        <th>
+            Nombre de Salle
+        </th>
+        @*<th class="text-center">Action</th>*@
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.descriptionBien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.superficieBien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lacaliteBien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nbrSalleEau)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nbrCuisine)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nbrToilette)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nbrSalle)
+            </td>
+            @*<td class="col-md-4 text-center">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IdBien }, new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.IdBien }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdBien }, new { @class = "btn btn-danger" })
+                </td>*@
+        </tr>
+    }
+
+</table>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        var status = document.getElementById("status").value;
+        if (status == "success") {
+            swal("Message", "Appartement ajouté !", "success")
+        }
+    </script>
+}

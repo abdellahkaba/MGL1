@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -10,13 +11,27 @@ namespace Projet1.Models
     public class BdImmobilier: DbContext
     {
         public BdImmobilier(): base("conImmobilier") { }
-        public DbSet<User> users { get; set; }
-        public DbSet<Bien> biens { get; set; }
+       
+
+        public DbSet<Utilisateur> users { get; set; }
         public DbSet<Proprietaire> proprietaires { get; set; }
+        public IEnumerable Proprietaires { get; internal set; }
+        public DbSet<Bien> biens { get; set; }
         public DbSet<Maison> maisons { get; set; }
         public DbSet<Appartement> appartements { get; set; }
         public DbSet<Studio> studios { get; set; }
         public DbSet<Terrain> terrains { get; set; }
+        public DbSet<MaisonViewModel> maisonViewModels { get; set; }
+
+        // public System.Data.Entity.DbSet<Projet1.Models.TerrainViewModel> TerrainViewModels { get; set; }
+
+        //public System.Data.Entity.DbSet<Projet1.Models.AppartementViewModel> AppartementViewModels { get; set; }
+
+        //public System.Data.Entity.DbSet<Projet1.Models.MaisonViewModel> MaisonViewModels { get; set; }
+
+        //public System.Data.Entity.DbSet<Projet1.Models.MaisonViewModel> MaisonViewModels { get; set; }
+
+
 
         /*protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

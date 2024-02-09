@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Details</h2>
@@ -40,30 +41,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.password)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IdProprio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IdProprio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.nomProprio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nomProprio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.contactProprio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.contactProprio)
         </dd>
 
     </dl>
